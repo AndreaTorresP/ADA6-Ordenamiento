@@ -9,9 +9,14 @@ import java.util.StringTokenizer;
 import mode1.spotify;
 
 public class loadSpotify {
-    String filename = "data.csv";
-    File archivo = new File(filename);
+    String filename;
+    File archivo;
     LinkedList<spotify> topSpotify;
+
+    public loadSpotify(String filename) {
+        this.filename = filename;
+        this.archivo = new File(filename);
+    }
 
     public LinkedList<spotify> readSCV() throws FileNotFoundException {
         LinkedList<spotify> topSpotify = new LinkedList<>();

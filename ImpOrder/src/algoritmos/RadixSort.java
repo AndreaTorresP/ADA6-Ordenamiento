@@ -1,49 +1,49 @@
 package algoritmos;
 
-import java.io.*;
 import java.util.*;
+import mode1.spotify;
 
 public class RadixSort {
-    private long[] theArray;          // ref to array theArray
+    private spotify[] theArray;          // ref to array theArray
     private int nElems;               // number of data items
     //-----------------------------------------------------------
     public RadixSort(int max)   {
-        theArray = new long[max];      // create array
+        theArray = new spotify[max];      // create array
         nElems = 0;
     }
     
     //-----------------------------------------------------------
-    public void insert(long value){
+    public void insert(spotify value){
         theArray[nElems] = value;      // insert it
         nElems++;                      // increment size
     }
 
     public void display() {
         for(int j=0; j<nElems; j++)    // for each element,
-            System.out.print(theArray[j] + " ");  // display it
-        System.out.println("");
+            System.out.print(theArray[j].display());  // display it
+        System.out.println();
     }
 
 	// A utility function to get maximum value in arr[]
 	private long getMax(){
-		long mx = theArray[0];
+		spotify mx = theArray[0];
 		for (int i = 1; i < nElems; i++)
-			if (theArray[i] > mx)
+			if (theArray[i].getPopularity() > mx.getPopularity())
 				mx = theArray[i];
-		return mx;
+		return mx.getPopularity();
 	}
 
 	// A function to do counting sort of arr[] according to
 	// the digit represented by exp.
-	public void countSort(int exp){
-		long[] output = new long[nElems]; // output array
+	private void countSort(int exp){
+		spotify[] output = new spotify[nElems]; // output array
 		int i;
 		long[] count = new long[10];
 		Arrays.fill(count, 0);
 
 		// Store count of occurrences in count[]
 		for (i = 0; i < nElems; i++)
-			count[(int) ((theArray[i] / exp) % 10)]++;
+			count[(int) ((theArray[i].getPopularity() / exp) % 10)]++;
 
 		// Change count[i] so that count[i] now contains
 		// actual position of this digit in output[]
@@ -52,8 +52,8 @@ public class RadixSort {
 
 		// Build the output array
 		for (i = nElems - 1; i >= 0; i--) {
-			output[(int) (count[(int) ((theArray[i] / exp) % 10)] - 1)] = theArray[i];
-			count[(int) ((theArray[i] / exp) % 10)]--;
+			output[(int) (count[(int) ((theArray[i].getPopularity() / exp) % 10)] - 1)] = theArray[i];
+			count[(int) ((theArray[i].getPopularity() / exp) % 10)]--;
 		}
 
 		// Copy the output array to arr[], so that arr[] now
