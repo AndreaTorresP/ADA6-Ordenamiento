@@ -25,76 +25,109 @@ public class MergeSort {
         System.out.println("");
     }
 
-    public static LinkedList<spotify> mergeSort(LinkedList<spotify> topSpotify, Comparator<? super spotify> c) {
-        theArray = new spotify[topSpotify.size()];
-        theArray = convertirArray(topSpotify);
-
-        spotify[] workSpace = new spotify[topSpotify.size()];
-        recMergeSort(workSpace, 0, topSpotify.size() - 1, c);
-
-        topSpotify = convertirLista();
-
-        return topSpotify;
+    public void mergeSort() {
+        spotify[] workSpace = new spotify[nElems];
+        recMergeSort(workSpace, 0, nElems - 1);
     }
 
-    public static void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound,
-            Comparator<? super spotify> c) {
+    private void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound) {
         if (lowerBound == upperBound) // if range is 1,
             return; // no use sorting
         else {
             int mid = (lowerBound + upperBound) / 2; // find midpoint
-            recMergeSort(workSpace, lowerBound, mid, c); // sort low half
-            recMergeSort(workSpace, mid + 1, upperBound, c); // sort high half
-            merge(workSpace, lowerBound, mid + 1, upperBound, c); // merge them
+            recMergeSort(workSpace, lowerBound, mid); // sort low half
+            recMergeSort(workSpace, mid + 1, upperBound); // sort high half
+
+            if (tipoOrden == "menor")
+                partitionMenor(workSpace, lowerBound, mid + 1, upperBound);
+            else
+                partitionMayor(workSpace, lowerBound, mid + 1, upperBound);
+
+            // merge(workSpace, lowerBound, mid+1, upperBound); // merge them
         } // end else
     } // end recMergeSort()
 
-    private static void merge(spotify[] workSpace, int lowPtr, int highPtr, int upperBound,
-            Comparator<? super spotify> c) {
+    private void partitionMenor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
         int n = upperBound - lowerBound + 1; // # of items
 
-        while (lowPtr <= mid && highPtr <= upperBound)
-            if (c.compare(theArray[lowPtr], theArray[highPtr]) < 0)
+        if (tipoDato == "numeros") {
+            while (lowPtr <= mid && highPtr <= upperBound)
+                if (theArray[lowPtr].getPopularity() < theArray[highPtr].getPopularity())
+                    workSpace[j++] = theArray[lowPtr++];
+                else
+                    workSpace[j++] = theArray[highPtr++];
+
+            while (lowPtr <= mid)
                 workSpace[j++] = theArray[lowPtr++];
-            else
+
+            while (highPtr <= upperBound)
                 workSpace[j++] = theArray[highPtr++];
 
-        while (lowPtr <= mid)
-            workSpace[j++] = theArray[lowPtr++];
+            for (j = 0; j < n; j++)
+                theArray[lowerBound + j] = workSpace[j];
 
-        while (highPtr <= upperBound)
-            workSpace[j++] = theArray[highPtr++];
+        } else {
+            while (lowPtr <= mid && highPtr <= upperBound)
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) < 0)
+                    workSpace[j++] = theArray[lowPtr++];
+                else
+                    workSpace[j++] = theArray[highPtr++];
 
-        for (j = 0; j < n; j++)
-            theArray[lowerBound + j] = workSpace[j];
-    }
+            while (lowPtr <= mid)
+                workSpace[j++] = theArray[lowPtr++];
 
-    public static spotify[] convertirArray(LinkedList<spotify> topSpotify) {
+            while (highPtr <= upperBound)
+                workSpace[j++] = theArray[highPtr++];
 
-        int cont = 0;
-
-        while (cont < topSpotify.size()) {
-            theArray[cont] = topSpotify.get(cont);
-            cont++;
+            for (j = 0; j < n; j++)
+                theArray[lowerBound + j] = workSpace[j];
         }
 
-        return theArray;
     }
 
-    public static LinkedList<spotify> convertirLista() {
+    private void partitionMayor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
 
-        LinkedList<spotify> topSpotify = new LinkedList<>();
-        int cont = 0;
+        int j = 0; // workspace index
+        int lowerBound = lowPtr;
+        int mid = highPtr - 1;
+        int n = upperBound - lowerBound + 1; // # of items
 
-        while (cont < theArray.length) {
-            topSpotify.add(theArray[cont]);
-            cont++;
+        if (tipoDato == "numeros") {
+            while (lowPtr <= mid && highPtr <= upperBound)
+                if (theArray[lowPtr].getPopularity() > theArray[highPtr].getPopularity())
+                    workSpace[j++] = theArray[lowPtr++];
+                else
+                    workSpace[j++] = theArray[highPtr++];
+
+            while (lowPtr <= mid)
+                workSpace[j++] = theArray[lowPtr++];
+
+            while (highPtr <= upperBound)
+                workSpace[j++] = theArray[highPtr++];
+
+            for (j = 0; j < n; j++)
+                theArray[lowerBound + j] = workSpace[j];
+
+        } else {
+            while (lowPtr <= mid && highPtr <= upperBound)
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) > 0)
+                    workSpace[j++] = theArray[lowPtr++];
+                else
+                    workSpace[j++] = theArray[highPtr++];
+
+            while (lowPtr <= mid)
+                workSpace[j++] = theArray[lowPtr++];
+
+            while (highPtr <= upperBound)
+                workSpace[j++] = theArray[highPtr++];
+
+            for (j = 0; j < n; j++)
+                theArray[lowerBound + j] = workSpace[j];
         }
 
-        return topSpotify;
     }
 
 }

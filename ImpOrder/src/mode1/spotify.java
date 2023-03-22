@@ -11,9 +11,13 @@ public class spotify {
     private int loudness;
     private int liveness;
     private int valence;
+    private int length;
+    private int acousticness;
+    private int speechiness;
+    private int popularity;
 
     public spotify(int id, String name, String artist, String genre, int beats, int energy, int danceability,
-            int loudness, int liveness, int valence) {
+            int loudness, int liveness, int valence, int length, int acousticness, int speechiness, int popularity) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -24,6 +28,10 @@ public class spotify {
         this.loudness = loudness;
         this.liveness = liveness;
         this.valence = valence;
+        this.length = length;
+        this.acousticness = acousticness;
+        this.speechiness = speechiness;
+        this.popularity = popularity;
     }
 
     public int getId() {
@@ -104,6 +112,38 @@ public class spotify {
 
     public void setValence(int valence) {
         this.valence = valence;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getAcousticness() {
+        return acousticness;
+    }
+
+    public void setAcousticness(int acousticness) {
+        this.acousticness = acousticness;
+    }
+
+    public int getSpeechiness() {
+        return speechiness;
+    }
+
+    public void setSpeechiness(int speechiness) {
+        this.speechiness = speechiness;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 
 }

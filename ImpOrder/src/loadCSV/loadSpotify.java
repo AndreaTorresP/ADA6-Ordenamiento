@@ -30,8 +30,12 @@ public class loadSpotify {
                 int loudness = Integer.parseInt(tokenizer.nextToken());
                 int liveness = Integer.parseInt(tokenizer.nextToken());
                 int valence = Integer.parseInt(tokenizer.nextToken());
-
-                spotify sp = new spotify(id, name, artist, genre, beats, energy, danceability, loudness, liveness, valence);
+                int length = Integer.parseInt(tokenizer.nextToken());
+                int acousticness = Integer.parseInt(tokenizer.nextToken());
+                int speechiness = Integer.parseInt(tokenizer.nextToken());
+                int popularity = Integer.parseInt(tokenizer.nextToken());
+                spotify sp = new spotify(id, name, artist, genre, beats, energy, danceability, loudness, liveness,
+                        valence, length, acousticness, speechiness, popularity);
                 topSpotify.add(sp);
 
             }
@@ -40,8 +44,6 @@ public class loadSpotify {
             e.printStackTrace();
         }
         return topSpotify;
-
-        
 
     }
 
