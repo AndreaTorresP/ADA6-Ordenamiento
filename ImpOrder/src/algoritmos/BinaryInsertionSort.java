@@ -1,16 +1,20 @@
 package algoritmos;
 
+import java.util.LinkedList;
+
 import mode1.spotify;
+
+
 
 public class BinaryInsertionSort {
     
     // implementacion iterativa
 
-    public int partitionMenor( int a[], int item, int low, int high) {
+    public static <T> int partitionMenor( LinkedList<spotify> topSpotify, spotify item, int low, int high, String tipoDato) {
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if(tipoDato=="numeros"){
-                if (item == a[mid])
+                if (item == topSpotify.get(mid))
                 return mid + 1;
             else if (item > a[mid])
                 low = mid + 1;
@@ -30,11 +34,11 @@ public class BinaryInsertionSort {
         return low;
             }
 
-    public int partitionMayor(int a[], int item, int low, int high) {
+    public static <T> int partitionMayor(LinkedList<spotify> topSpotify, spotify item, int low, int high, String tipoDato) {
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if(tipoDato=="numeros"){
-                if (item == a[mid])
+                if (item == topSpotify.get(mid))
                 return mid + 1;
             else if (item < a[mid])
                 low = mid + 1;
@@ -51,29 +55,32 @@ public class BinaryInsertionSort {
         }
             
         }
+        return low;
     }
 
-    public void binaryInsertionSort(int a[], int n) {
+    public static <T> LinkedList<spotify> binaryInsertionSort(LinkedList<spotify> topSpotify, int n, String tipoOrden, String tipoDato) {
         
-        int i, loc, j, k, selected;
+        int i, loc, j, k;
+        spotify selected;
 
         for (i = 1; i < n; ++i) {
             j = i - 1;
-            selected = a[i];
+            selected = topSpotify.get(i);
 
             // encuentra la posicion donde debe ser insertado el elemento
             if (tipoOrden == "menor") {
-                loc = partitionMenor(a, selected, 0, j);
+                loc = partitionMenor(topSpotify, selected, 0, j, tipoDato);
             } else
-                loc = partitionMayor(a, selected, 0, j);
+                loc = partitionMayor(topSpotify, selected, 0, j, tipoDato);
 
             // Hace un corrimiento a la derecha de los datos
             while (j >= loc) {
-                a[j + 1] = a[j];
+                topSpotify.set(j+1, topSpotify.get(i));
                 j--;
             }
-            a[j + 1] = selected;
+            topSpotify.set(j + 1, selected);
         }
+        return topSpotify;
     }
 
     public void printArray(int arr[]) {
