@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         //String archiboDatos = args[0];
-        //String archivoOrden = args[1];
+        String archivoOrden = args[0];
 
         String archiboDatos = "top50.csv";
 
@@ -15,7 +15,7 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
         LinkedList<spotify> listaDatos = new LinkedList<spotify>();
 
-        loadSpotify ls= new loadSpotify(archiboDatos);
+        loadSpotify ls= new loadSpotify(archiboDatos, archivoOrden);
         listaDatos = ls.readSCV();
       
         
@@ -68,5 +68,7 @@ public class Main {
         rdx.display();
 
         entrada.close();
+
+        ls.writeCSV(listaDatos);
     }
 }

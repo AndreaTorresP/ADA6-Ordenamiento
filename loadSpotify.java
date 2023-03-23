@@ -2,19 +2,23 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class loadSpotify {
-    String filename;
+    String filenameEntrada;
+    String filenameSalida;
     File archivo;
     LinkedList<spotify> topSpotify;
+    String firstLine = "";
 
-    public loadSpotify(String filename) {
-        this.filename = filename;
-        this.archivo = new File(filename);
+    public loadSpotify(String filenameEntrada, String filenameSalida) {
+        this.filenameEntrada = filenameEntrada;
+        this.filenameSalida = filenameSalida;
+        this.archivo = new File(filenameEntrada);
     }
 
     public LinkedList<spotify> readSCV() {
@@ -22,7 +26,7 @@ public class loadSpotify {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            BufferedReader reader = new BufferedReader(new FileReader(filenameEntrada));
         
             String line = null;
             String[] parts;
@@ -54,6 +58,7 @@ public class loadSpotify {
                     //System.out.println(sp.display());
                 }
                 else{
+                    firstLine = line;
                     cont = 1;
                 }
 
@@ -96,5 +101,38 @@ public class loadSpotify {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }*/
+    }
+
+    public void writeCSV(LinkedList<spotify> topSpotify){
+        String archivoCalifs = "ListaDeCalificaciones.csv";
+        String delimitador = ",";
+        String nextLine = "\n";
+        String[] parts = firstLine.split(",");
+
+        FileWriter fw;
+        try {
+            fw = new FileWriter(filenameSalida);
+
+            for(int i=0; i<parts.length-1; i++) fw.append(parts[i]).append(delimitador);
+            fw.append(parts[parts.length -1]).append(nextLine);
+
+            //fw.append("Matricula").append(delimitador).append("Asignatura").append(delimitador).append("Calificacion").append(nextLine);
+
+            for(int i=0; i<topSpotify.size(); i++){
+                fw.append((i+1) + "").append(delimitador).append(topSpotify.get(i).getName()).append(delimitador)
+                .append(topSpotify.get(i).getArtist()).append(delimitador).append(topSpotify.get(i).getGenre()).append(delimitador)
+                .append(topSpotify.get(i).getBeats() + "").append(delimitador).append(topSpotify.get(i).getEnergy() + "").append(delimitador)
+                .append(topSpotify.get(i).getDanceability() + "").append(delimitador).append(topSpotify.get(i).getLoudness() + "")
+                .append(delimitador).append(topSpotify.get(i).getLiveness() + "").append(delimitador).append(topSpotify.get(i).getValence() + "")
+                .append(delimitador).append(topSpotify.get(i).getLength() + "").append(delimitador)
+                .append(topSpotify.get(i).getAcousticness() + "").append(delimitador).append(topSpotify.get(i).getSpeechiness() + "")
+                .append(delimitador).append(topSpotify.get(i).getPopularity() + "").append(nextLine);
+            }
+
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
