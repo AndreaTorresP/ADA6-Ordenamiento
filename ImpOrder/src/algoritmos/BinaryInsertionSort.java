@@ -91,7 +91,7 @@ public class BinaryInsertionSort {
             writer.println(" ,Track.Name,Artist.Name,Genre,Beats.Per.Minute,Energy,Danceability,Loudness..dB..,Liveness,Valence.,Length.,Acousticness..,Speechiness.,Popularity");
             // Escribir datos
             for (spotify sp : a) {
-                writer.println(sp.getName() + "," + sp.getArtist()+ "," + sp.getArtist() + "," + sp.getGenre()+","+
+                writer.println(sp.getId()+","+sp.getName() + "," + sp.getArtist() + "," + sp.getGenre()+","+
                 sp.getBeats()+","+sp.getEnergy()+","+sp.getDanceability()+ ","+sp.getLoudness()+","+ 
                 sp.getLiveness() +","+sp.getValence()+ ","+sp.getLength()+","+sp.getAcousticness()+","+
                 sp.getSpeechiness()+","+sp.getPopularity());
