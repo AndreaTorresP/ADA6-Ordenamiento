@@ -1,6 +1,5 @@
 package algoritmos;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import mode1.spotify;
@@ -8,15 +7,21 @@ import mode1.spotify;
 public class MergeSort {
     private static spotify[] theArray; // ref to array theArray
     private int nElems; // number of data items
+    private static String tipoDato;
+    private static String tipoOrden;
 
-    public MergeSort(int max) {
+    public MergeSort(int max, String tipoDato, String tipoOrden) {
         theArray = new spotify[max]; // create array
         nElems = 0;
+        MergeSort.tipoDato = tipoDato;
+        MergeSort.tipoOrden = tipoOrden;
+
     }
 
     public void insert(spotify value) {
         theArray[nElems] = value; // insert it
         nElems++; // increment size
+
     }
 
     public void display() {
@@ -25,12 +30,13 @@ public class MergeSort {
         System.out.println("");
     }
 
-    public void mergeSort() {
-        spotify[] workSpace = new spotify[nElems];
-        recMergeSort(workSpace, 0, nElems - 1);
+    public static LinkedList<spotify> mergeSort(LinkedList<spotify> topSpotify, String tipoDato, String tipoOrden) {
+        spotify[] workSpace = new spotify[topSpotify.size()];
+        recMergeSort(workSpace, 0, topSpotify.size() - 1);
+        return topSpotify;
     }
 
-    private void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound) {
+    private static void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound) {
         if (lowerBound == upperBound) // if range is 1,
             return; // no use sorting
         else {
@@ -47,7 +53,7 @@ public class MergeSort {
         } // end else
     } // end recMergeSort()
 
-    private void partitionMenor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
+    private static void partitionMenor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
@@ -88,7 +94,7 @@ public class MergeSort {
 
     }
 
-    private void partitionMayor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
+    private static void partitionMayor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
 
         int j = 0; // workspace index
         int lowerBound = lowPtr;

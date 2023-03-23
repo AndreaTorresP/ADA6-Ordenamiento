@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import algoritmos.BinaryInsertionSort;
 import algoritmos.MergeSort;
 import loadCSV.loadSpotify;
 import mode1.spotify;
@@ -14,7 +15,7 @@ public class menu {
 
     public void inicio(String archivoEntrada, String archivoSalida) throws FileNotFoundException {
 
-        LinkedList<spotify> topSpotify = ls.readSCV();
+        
         boolean finalizar = false;
         int opcion;
         int subOpcion;
@@ -51,7 +52,8 @@ public class menu {
                             ordenamiento = entrada.nextInt();
                             if (ordenamiento == 1) {
                                 tipoOrden = "menor";
-                                // lamada a la funcion binary
+                                LinkedList<spotify> topSpotify = ls.readSCV(); 
+                                topSpotify = BinaryInsertionSort.binaryInsertionSort(topSpotify, topSpotify.size(), tipoDato, tipoOrden);
                             } else
                                 tipoOrden = "mayor";// llamada a la funcion binary
 
@@ -65,7 +67,8 @@ public class menu {
 
                             if (ordenamiento == 1) {
                                 tipoOrden = "menor";
-                                // lamada a la funcion binary
+                                LinkedList<spotify> topSpotify = ls.readSCV(); 
+                                topSpotify = MergeSort.mergeSort(topSpotify,  tipoDato, tipoOrden);
                             } else
                                 tipoOrden = "mayor";// llamada a la funcion binary
 
