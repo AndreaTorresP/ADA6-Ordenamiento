@@ -1,10 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +7,6 @@ public class Main {
         //String archivoOrden = args[1];
 
         String archiboDatos = "top50.csv";
-
 
         int dato;
         int ordenamiento;
@@ -45,7 +39,7 @@ public class Main {
         else tipoOrden = "mayor";
 
 
-        spotify sp0 = new spotify(3, "jsdj", "artist", "genre", 112, 11,
+        /*spotify sp0 = new spotify(3, "jsdj", "artist", "genre", 112, 11,
         11, 11, 11, 11, 11, 11, 11,
         11);
         listaDatos.add(sp0);
@@ -63,13 +57,16 @@ public class Main {
         spotify sp3 = new spotify(1, "addcfewbc", "artist", "genre", 112, 11,
         11, 11, 11, 11, 11, 11, 11,
         10);
-        listaDatos.add(sp3);
+        listaDatos.add(sp3);*/
 
-        QuickSort qck = new QuickSort(5, tipoDato, tipoOrden, listaDatos);
+        QuickSort qck = new QuickSort(tipoDato, tipoOrden, listaDatos);
+        qck.recQSort(0, listaDatos.size()-1);
+        //qck.display();
 
-        qck.recQSort(0, 3);
+        RadixSort rdx = new RadixSort(tipoOrden, listaDatos);
+        rdx.sort();
+        rdx.display();
 
-        qck.display();
         entrada.close();
     }
 }

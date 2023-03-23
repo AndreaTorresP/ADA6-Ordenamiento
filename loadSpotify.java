@@ -18,8 +18,9 @@ public class loadSpotify {
     }
 
     public LinkedList<spotify> readSCV() {
+        LinkedList<spotify> topSpotify = new LinkedList<>();
+
         try {
-            LinkedList<spotify> topSpotify = new LinkedList<>();
 
             BufferedReader reader = new BufferedReader(new FileReader(filename));
         
@@ -31,7 +32,7 @@ public class loadSpotify {
                 parts = line.split(",");
 
                 if(cont!=0){
-                    int id = Integer.parseInt(parts[0]);
+                    //int id = Integer.parseInt(parts[0]);
                     String name = parts[1];
                     String artist = parts[2];
                     String genre = parts[3];
@@ -46,13 +47,17 @@ public class loadSpotify {
                     int speechiness = Integer.parseInt(parts[12]);
                     int popularity = Integer.parseInt(parts[13]);
 
-                    spotify sp = new spotify(id, name, artist, genre, beats, energy, danceability, loudness,
+                    spotify sp = new spotify(1, name, artist, genre, beats, energy, danceability, loudness,
                     liveness, valence, length, acousticness, speechiness, popularity);
                     topSpotify.add(sp);
+
+                    //System.out.println(sp.display());
                 }
                 else{
                     cont = 1;
                 }
+
+                
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -61,6 +66,8 @@ public class loadSpotify {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return topSpotify;
 
         /*try (Scanner scan = new Scanner(archivo)) {
             StringTokenizer tokenizer;
@@ -89,6 +96,5 @@ public class loadSpotify {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }*/
-        return topSpotify;
     }
 }

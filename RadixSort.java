@@ -1,76 +1,91 @@
 import java.util.*;
 
 public class RadixSort {
-    private spotify[] theArray;          // ref to array theArray
-    private int nElems;               // number of data items
-    //-----------------------------------------------------------
-    public RadixSort(int max)   {
-        theArray = new spotify[max];      // create array
-        nElems = 0;
+	LinkedList<spotify> theArray;
+	private String tipoOrden;         // menor o mayor
+
+	public RadixSort(String tipoOrden, LinkedList<spotify> theArray) {
+        this.theArray = theArray;
+		this.tipoOrden = tipoOrden;
     }
     
-    //-----------------------------------------------------------
     public void insert(spotify value){
-        theArray[nElems] = value;      // insert it
-        nElems++;                      // increment size
+        theArray.add(value);
     }
 
     public void display() {
-        for(int j=0; j<nElems; j++)    // for each element,
-            System.out.print(theArray[j].display());  // display it
+        for(int j=0; j<theArray.size(); j++)
+            System.out.print(theArray.get(j).display());
         System.out.println();
     }
 
 	// A utility function to get maximum value in arr[]
 	private long getMax(){
-		spotify mx = theArray[0];
-		for (int i = 1; i < nElems; i++)
-			if (theArray[i].getPopularity() > mx.getPopularity())
-				mx = theArray[i];
+		spotify mx = theArray.getFirst();
+		for (int i = 1; i < theArray.size(); i++)
+			if (theArray.get(i).getPopularity() > mx.getPopularity())
+				mx = theArray.get(i);
 		return mx.getPopularity();
 	}
 
 	// A function to do counting sort of arr[] according to
 	// the digit represented by exp.
-	private void countSort(int exp){
-		spotify[] output = new spotify[nElems]; // output array
+	//Menor a mayor
+	private void countSortMenor(int exp){
+		spotify[] output = new spotify[theArray.size()];
 		int i;
 		long[] count = new long[10];
 		Arrays.fill(count, 0);
 
-		// Store count of occurrences in count[]
-		for (i = 0; i < nElems; i++)
-			count[(int) ((theArray[i].getPopularity() / exp) % 10)]++;
+		for (i = 0; i < theArray.size(); i++)
+			count[(int) ((theArray.get(i).getPopularity() / exp) % 10)]++;
 
-		// Change count[i] so that count[i] now contains
-		// actual position of this digit in output[]
 		for (i = 1; i < 10; i++)
 			count[i] += count[i - 1];
 
-		// Build the output array
-		for (i = nElems - 1; i >= 0; i--) {
-			output[(int) (count[(int) ((theArray[i].getPopularity() / exp) % 10)] - 1)] = theArray[i];
-			count[(int) ((theArray[i].getPopularity() / exp) % 10)]--;
+		for (i = theArray.size() - 1; i >= 0; i--) {
+			output[(int) (count[(int) ((theArray.get(i).getPopularity() / exp) % 10)] - 1)] = theArray.get(i);
+			count[(int) ((theArray.get(i).getPopularity() / exp) % 10)]--;
 		}
 
-		// Copy the output array to arr[], so that arr[] now
-		// contains sorted numbers according to current digit
-        theArray = Arrays.copyOf(output, output.length);
-		
+		theArray.clear();
+		for(i = 0; i<output.length; i++) theArray.add(output[i]);		
+	}
+
+	// A function to do counting sort of arr[] according to
+	// the digit represented by exp.
+	//Mayor a menor
+	private void countSortMayor(int exp){
+		spotify[] output = new spotify[theArray.size()];
+		int i;
+		long[] count = new long[10];
+		Arrays.fill(count, 0);
+
+		for (i = 0; i < theArray.size(); i++)
+			count[(int) (9 - ((theArray.get(i).getPopularity() / exp) % 10))]++;
+
+		for (i = 1; i < 10; i++)
+			count[i] += count[i - 1];
+
+		for (i = theArray.size() - 1; i >= 0; i--) {
+			output[(int) (count[(int) (9 - ((theArray.get(i).getPopularity() / exp) % 10))] - 1)] = theArray.get(i);
+			count[(int) (9 - ((theArray.get(i).getPopularity() / exp) % 10))]--;
+		}
+
+		theArray.clear();
+		for(i = 0; i<output.length; i++) theArray.add(output[i]);		
 	}
 
 	// The main function to that sorts arr[] of size n using
 	// Radix Sort
 	public void sort(){
-		// Find the maximum number to know number of digits
 		long m = getMax();
 
-		// Do counting sort for every digit. Note that
-		// instead of passing digit number, exp is passed.
-		// exp is 10^i where i is current digit number
-		for (int exp = 1; m / exp > 0; exp *= 10)
-			countSort(exp);
+		if(tipoOrden.equals("menor"))
+			for (int exp = 1; m / exp > 0; exp *= 10)
+				countSortMenor(exp);
+		else
+			for (int exp = 1; m / exp > 0; exp *= 10)
+				countSortMayor(exp);
 	}
 }
-/* This code is contributed by Devesh Agrawal */
-

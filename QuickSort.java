@@ -2,14 +2,11 @@ import java.util.LinkedList;
 
 public class QuickSort{
     LinkedList<spotify> theArray;
-//    private spotify[] theArray;       // ref to array theArray
-//    private int nElems;               // number of data items
     private String tipoDato;          // letras o numeros
     private String tipoOrden;         // menor o mayor
 
-    public QuickSort(int max, String tipoDato, String tipoOrden, LinkedList<spotify> theArray)   {
+    public QuickSort(String tipoDato, String tipoOrden, LinkedList<spotify> theArray)   {
       this.theArray = theArray;
-      //nElems = 0;
       this.tipoDato = tipoDato;
       this.tipoOrden = tipoOrden;
     }
