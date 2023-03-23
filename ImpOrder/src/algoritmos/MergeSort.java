@@ -1,5 +1,8 @@
 package algoritmos;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 
 import mode1.spotify;
@@ -7,14 +10,10 @@ import mode1.spotify;
 public class MergeSort {
     private static spotify[] theArray; // ref to array theArray
     private int nElems; // number of data items
-    private static String tipoDato;
-    private static String tipoOrden;
 
-    public MergeSort(int max, String tipoDato, String tipoOrden) {
+    public MergeSort(int max) {
         theArray = new spotify[max]; // create array
         nElems = 0;
-        MergeSort.tipoDato = tipoDato;
-        MergeSort.tipoOrden = tipoOrden;
 
     }
 
@@ -30,38 +29,40 @@ public class MergeSort {
         System.out.println("");
     }
 
-    public static LinkedList<spotify> mergeSort(LinkedList<spotify> topSpotify, String tipoDato, String tipoOrden) {
-        spotify[] workSpace = new spotify[topSpotify.size()];
-        recMergeSort(workSpace, 0, topSpotify.size() - 1);
-        return topSpotify;
+    public spotify[] mergeSort(LinkedList<spotify> lista, int subOpcion, int tipoOrden) {
+
+        spotify[] workSpace = new spotify[nElems];
+        recMergeSort(workSpace, 0, nElems - 1, subOpcion, tipoOrden);
+        return theArray;
     }
 
-    private static void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound) {
+    private void recMergeSort(spotify[] workSpace, int lowerBound, int upperBound, int subOpcion,
+            int tipoOrden) {
         if (lowerBound == upperBound) // if range is 1,
             return; // no use sorting
         else {
             int mid = (lowerBound + upperBound) / 2; // find midpoint
-            recMergeSort(workSpace, lowerBound, mid); // sort low half
-            recMergeSort(workSpace, mid + 1, upperBound); // sort high half
+            recMergeSort(workSpace, lowerBound, mid, subOpcion, tipoOrden); // sort low half
+            recMergeSort(workSpace, mid + 1, upperBound, subOpcion, tipoOrden); // sort high half
 
-            if (tipoOrden == "menor")
-                partitionMenor(workSpace, lowerBound, mid + 1, upperBound);
+            if (tipoOrden == 1)
+                partitionMenor(workSpace, lowerBound, mid + 1, upperBound, subOpcion);
             else
-                partitionMayor(workSpace, lowerBound, mid + 1, upperBound);
+                partitionMayor(workSpace, lowerBound, mid + 1, upperBound, subOpcion);
 
             // merge(workSpace, lowerBound, mid+1, upperBound); // merge them
         } // end else
     } // end recMergeSort()
 
-    private static void partitionMenor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
+    private void partitionMenor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound, int subOpcion) {
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
         int n = upperBound - lowerBound + 1; // # of items
 
-        if (tipoDato == "numeros") {
+        if (subOpcion == 1) {
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getPopularity() < theArray[highPtr].getPopularity())
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) < 0)
                     workSpace[j++] = theArray[lowPtr++];
                 else
                     workSpace[j++] = theArray[highPtr++];
@@ -76,8 +77,9 @@ public class MergeSort {
                 theArray[lowerBound + j] = workSpace[j];
 
         } else {
+
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) < 0)
+                if (theArray[lowPtr].getPopularity() < theArray[highPtr].getPopularity())
                     workSpace[j++] = theArray[lowPtr++];
                 else
                     workSpace[j++] = theArray[highPtr++];
@@ -94,16 +96,16 @@ public class MergeSort {
 
     }
 
-    private static void partitionMayor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound) {
+    private void partitionMayor(spotify[] workSpace, int lowPtr, int highPtr, int upperBound, int subOpcion) {
 
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
         int n = upperBound - lowerBound + 1; // # of items
 
-        if (tipoDato == "numeros") {
+        if (subOpcion == 1) {
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getPopularity() > theArray[highPtr].getPopularity())
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) > 0)
                     workSpace[j++] = theArray[lowPtr++];
                 else
                     workSpace[j++] = theArray[highPtr++];
@@ -118,8 +120,9 @@ public class MergeSort {
                 theArray[lowerBound + j] = workSpace[j];
 
         } else {
+
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) > 0)
+                if (theArray[lowPtr].getPopularity() > theArray[highPtr].getPopularity())
                     workSpace[j++] = theArray[lowPtr++];
                 else
                     workSpace[j++] = theArray[highPtr++];

@@ -59,7 +59,7 @@ public class BinaryInsertionSort {
         
     }
 
-    public void binaryInsertionSort(spotify a[], int n, int subOpcion, int tipoOrden) {
+    public spotify[] binaryInsertionSort(spotify a[], int n, int subOpcion, int tipoOrden) {
         int i, loc, j, k;
         spotify selected;
 
@@ -80,26 +80,9 @@ public class BinaryInsertionSort {
             }
             a[j + 1] = selected;
         }
-        CSVOrdenado(a);
+        return a;
     }
 
-    public void CSVOrdenado(spotify a[]){
-        try {
-            File file = new File("BIS.csv");
-            PrintWriter writer = new PrintWriter(file);
-            // Escribir encabezados
-            writer.println(" ,Track.Name,Artist.Name,Genre,Beats.Per.Minute,Energy,Danceability,Loudness..dB..,Liveness,Valence.,Length.,Acousticness..,Speechiness.,Popularity");
-            // Escribir datos
-            for (spotify sp : a) {
-                writer.println(sp.getId()+","+sp.getName() + "," + sp.getArtist() + "," + sp.getGenre()+","+
-                sp.getBeats()+","+sp.getEnergy()+","+sp.getDanceability()+ ","+sp.getLoudness()+","+ 
-                sp.getLiveness() +","+sp.getValence()+ ","+sp.getLength()+","+sp.getAcousticness()+","+
-                sp.getSpeechiness()+","+sp.getPopularity());
-            }
-            writer.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+ 
 
 }

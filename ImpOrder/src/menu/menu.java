@@ -1,6 +1,8 @@
 package menu;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.function.BinaryOperator;
@@ -14,6 +16,7 @@ public class menu {
     int opcion;
     int subOpcion;
     int tipoOrden;
+    String archivoName;
     private LinkedList<spotify> lista = new LinkedList<>();
     Scanner entrada = new Scanner(System.in);
 
@@ -37,13 +40,18 @@ public class menu {
                 subOpcion = elegirOpcion();
                 tipoOrden = modoOrdenar();
                 BinaryInsertionSort bs = new BinaryInsertionSort();
-                spotify array[] = cargarArrayBinary();
-                bs.binaryInsertionSort(array, lista.size(), subOpcion, tipoOrden);
+                spotify array[] = ArrayBinaryInsertionSort();
+                array=bs.binaryInsertionSort(array, lista.size(), subOpcion, tipoOrden);
+                CSVOrdenado(array, "BinaryInsertionSort.csv");
                 break;
             case 2:
                 subOpcion = elegirOpcion();
                 tipoOrden = modoOrdenar();
-                //mergeSort m = new mergeSort(lista.size());
+                MergeSort m = new MergeSort(lista.size());
+                insertMergeSort(m);
+                array=m.mergeSort(lista, subOpcion, tipoOrden);
+                CSVOrdenado(array, "MergeSort.csv");
+                break;
 
         }
 
@@ -67,7 +75,7 @@ public class menu {
         return tipoOrden;
     }
 
-    public spotify[] cargarArrayBinary() {
+    public spotify[] ArrayBinaryInsertionSort() {
         spotify[] array = new spotify[lista.size()];
         int elements = 0;
         for (int i = 0; i < lista.size(); i++) {
@@ -75,6 +83,31 @@ public class menu {
             elements++;
         }
         return array;
+    }
+
+    public void insertMergeSort(MergeSort m) {
+        for (int i = 0; i < lista.size(); i++) {
+            m.insert(lista.get(i));
+        }
+    }
+
+    public void CSVOrdenado(spotify [] array, String archivoName){
+        try {
+            File file = new File(archivoName);
+            PrintWriter writer = new PrintWriter(file);
+            // Escribir encabezados
+            writer.println(" ,Track.Name,Artist.Name,Genre,Beats.Per.Minute,Energy,Danceability,Loudness..dB..,Liveness,Valence.,Length.,Acousticness..,Speechiness.,Popularity");
+            // Escribir datos
+            for (spotify sp : array) {
+                writer.println(sp.getId()+","+sp.getName() + "," + sp.getArtist() + "," + sp.getGenre()+","+
+                sp.getBeats()+","+sp.getEnergy()+","+sp.getDanceability()+ ","+sp.getLoudness()+","+ 
+                sp.getLiveness() +","+sp.getValence()+ ","+sp.getLength()+","+sp.getAcousticness()+","+
+                sp.getSpeechiness()+","+sp.getPopularity());
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
