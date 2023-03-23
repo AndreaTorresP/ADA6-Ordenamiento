@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 import algoritmos.BinaryInsertionSort;
 import algoritmos.MergeSort;
 import loadCSV.metricas;
@@ -62,8 +61,7 @@ public class menu {
                 CSVOrdenado(array, "MergeSort.csv");
                 break;
 
-        }
-
+        }        
     }
 
     public int elegirOpcion() {

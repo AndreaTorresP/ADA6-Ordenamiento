@@ -17,7 +17,7 @@ public class spotify {
     private int popularity;
 
     public spotify(int id, String name, String artist, String genre, int beats, int energy, int danceability,
-            int loudness, int liveness, int valence, int length, int acousticness, int speechiness, int popularity) {
+        int loudness, int liveness, int valence, int length, int acousticness, int speechiness, int popularity) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -37,7 +37,6 @@ public class spotify {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -45,7 +44,6 @@ public class spotify {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -53,7 +51,6 @@ public class spotify {
     public String getArtist() {
         return artist;
     }
-
     public void setArtist(String artist) {
         this.artist = artist;
     }
@@ -61,7 +58,6 @@ public class spotify {
     public String getGenre() {
         return genre;
     }
-
     public void setGenre(String genre) {
         this.genre = genre;
     }
@@ -69,7 +65,6 @@ public class spotify {
     public int getBeats() {
         return beats;
     }
-
     public void setBeats(int beats) {
         this.beats = beats;
     }
@@ -77,7 +72,6 @@ public class spotify {
     public int getEnergy() {
         return energy;
     }
-
     public void setEnergy(int energy) {
         this.energy = energy;
     }
@@ -85,7 +79,6 @@ public class spotify {
     public int getDanceability() {
         return danceability;
     }
-
     public void setDanceability(int danceability) {
         this.danceability = danceability;
     }
@@ -93,7 +86,6 @@ public class spotify {
     public int getLoudness() {
         return loudness;
     }
-
     public void setLoudness(int loudness) {
         this.loudness = loudness;
     }
@@ -101,7 +93,6 @@ public class spotify {
     public int getLiveness() {
         return liveness;
     }
-
     public void setLiveness(int liveness) {
         this.liveness = liveness;
     }
@@ -109,7 +100,6 @@ public class spotify {
     public int getValence() {
         return valence;
     }
-
     public void setValence(int valence) {
         this.valence = valence;
     }
@@ -117,7 +107,6 @@ public class spotify {
     public int getLength() {
         return length;
     }
-
     public void setLength(int length) {
         this.length = length;
     }
@@ -125,7 +114,6 @@ public class spotify {
     public int getAcousticness() {
         return acousticness;
     }
-
     public void setAcousticness(int acousticness) {
         this.acousticness = acousticness;
     }
@@ -133,7 +121,6 @@ public class spotify {
     public int getSpeechiness() {
         return speechiness;
     }
-
     public void setSpeechiness(int speechiness) {
         this.speechiness = speechiness;
     }
@@ -141,9 +128,15 @@ public class spotify {
     public int getPopularity() {
         return popularity;
     }
-
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
 
+    public String display() {
+        return "{\nid: " + getId() + "\nName:" + getName() + "\nArtist: " + getArtist() + "\nGenre: " + getGenre()
+                + "\nBeats: " + getBeats() + "\nEnergy: " + getEnergy() + "\nDanceability: " + getDanceability()
+                + "\nLoudness: " + getLoudness() + "\nLiveness: " + getLiveness() + "\nValence: " + getValence()
+                + "\nLenght: " + getLength() + "\nAcousticness: " + getAcousticness() + "\nSpeechiness: "
+                + getSpeechiness() + "\nPopularity: " + getPopularity() + "\n}";
+    }
 }

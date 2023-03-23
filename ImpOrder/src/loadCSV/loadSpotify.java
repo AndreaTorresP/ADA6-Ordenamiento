@@ -11,21 +11,19 @@ import menu.menu;
 import mode1.spotify;
 
 public class loadSpotify {
+    String filename;
+    File archivo;
+    LinkedList<spotify> topSpotify;
 
+    public loadSpotify(String filename) {
+        this.filename = filename;
+        this.archivo = new File(filename);
+    }
 
-    public LinkedList <spotify> readSCV() throws FileNotFoundException {
-        LinkedList<spotify> lista = new LinkedList<>();
-        String filename = "top50.csv";
-        
-
-        try {
-        File archivo = new File(filename);
-        Scanner scan = new Scanner(new FileReader(archivo));
-        StringTokenizer tokenizer;
-        if(scan.hasNext()){
-            scan.nextLine();
-        }
-
+    public LinkedList<spotify> readSCV() throws FileNotFoundException {
+        LinkedList<spotify> topSpotify = new LinkedList<>();
+        try (Scanner scan = new Scanner(archivo)) {
+            StringTokenizer tokenizer;
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
                 tokenizer = new StringTokenizer(line, ",");
@@ -44,9 +42,9 @@ public class loadSpotify {
                 int speechiness = Integer.parseInt(tokenizer.nextToken());
                 int popularity = Integer.parseInt(tokenizer.nextToken());
 
-                spotify sp= new spotify(id, name, artist, genre, beats, energy, danceability, loudness, liveness, valence, length, acousticness, speechiness, popularity);
-                lista.add(sp);
-
+                spotify sp = new spotify(id, name, artist, genre, beats, energy, danceability, loudness, liveness,
+                valence, length, acousticness, speechiness, popularity);
+                topSpotify.add(sp);
             }
             scan.close();
 
@@ -54,11 +52,8 @@ public class loadSpotify {
             menu.inicio();
 
         } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return lista;
-
+        return topSpotify;
     }
-
 }
