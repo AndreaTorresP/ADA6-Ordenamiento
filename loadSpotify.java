@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+//import java.util.Scanner;
+//import java.util.StringTokenizer;
 
 public class loadSpotify {
     String filenameEntrada;
@@ -25,9 +25,7 @@ public class loadSpotify {
         LinkedList<spotify> topSpotify = new LinkedList<>();
 
         try {
-
             BufferedReader reader = new BufferedReader(new FileReader(filenameEntrada));
-        
             String line = null;
             String[] parts;
             int cont = 0;
@@ -62,7 +60,7 @@ public class loadSpotify {
                     cont = 1;
                 }
 
-                
+                reader.close();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -104,7 +102,6 @@ public class loadSpotify {
     }
 
     public void writeCSV(LinkedList<spotify> topSpotify){
-        String archivoCalifs = "ListaDeCalificaciones.csv";
         String delimitador = ",";
         String nextLine = "\n";
         String[] parts = firstLine.split(",");
