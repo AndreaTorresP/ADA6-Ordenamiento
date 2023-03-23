@@ -1,7 +1,4 @@
-package algoritmos;
-
 import java.util.LinkedList;
-import mode1.spotify;
 
 public class QuickSort{
     LinkedList<spotify> theArray;

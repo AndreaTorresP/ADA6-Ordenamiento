@@ -1,9 +1,5 @@
-package algoritmos;
-
 import java.util.Comparator;
 import java.util.LinkedList;
-
-import mode1.spotify;
 
 public class MergeSort {
     private static spotify[] theArray; // ref to array theArray

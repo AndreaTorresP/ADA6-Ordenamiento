@@ -1,7 +1,4 @@
-package algoritmos;
-
 import java.util.*;
-import mode1.spotify;
 
 public class RadixSort {
     private spotify[] theArray;          // ref to array theArray

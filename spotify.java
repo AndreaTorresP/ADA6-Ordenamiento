@@ -1,5 +1,3 @@
-package mode1;
-
 public class spotify {
     private int id;
     private String name;
