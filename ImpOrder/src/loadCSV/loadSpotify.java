@@ -2,10 +2,12 @@ package loadCSV;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import menu.menu;
 import mode1.spotify;
 
 public class loadSpotify {
@@ -44,6 +46,11 @@ public class loadSpotify {
                 valence, length, acousticness, speechiness, popularity);
                 topSpotify.add(sp);
             }
+            scan.close();
+
+            menu menu = new menu(lista);
+            menu.inicio();
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
