@@ -2,14 +2,15 @@ package menu;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.function.BinaryOperator;
 
 import algoritmos.BinaryInsertionSort;
 import algoritmos.MergeSort;
-import loadCSV.loadSpotify;
+import loadCSV.metricas;
 import mode1.spotify;
 
 public class menu {
@@ -17,6 +18,7 @@ public class menu {
     int subOpcion;
     int tipoOrden;
     String archivoName;
+    metricas m = new metricas();
     private LinkedList<spotify> lista = new LinkedList<>();
     Scanner entrada = new Scanner(System.in);
 
@@ -43,6 +45,13 @@ public class menu {
                 spotify array[] = ArrayBinaryInsertionSort();
                 array=bs.binaryInsertionSort(array, lista.size(), subOpcion, tipoOrden);
                 CSVOrdenado(array, "BinaryInsertionSort.csv");
+                try {
+                    
+                    procedimientos( opcion);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 break;
             case 2:
                 subOpcion = elegirOpcion();
@@ -108,6 +117,27 @@ public class menu {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void procedimientos( int opcion) throws IOException{
+        String metricas = "";
+        ArrayList<String> listaMetricas = new ArrayList<>();
+        listaMetricas.add("Method, EjecutionTime, Comparations, Interchanges");
+        
+        if(opcion==1){
+            metricas =  "BinaryInsertionSort" + "," + BinaryInsertionSort.tiempoTotal + "," + BinaryInsertionSort.numComparaciones + "," + BinaryInsertionSort.numIntercambios;
+            listaMetricas.add(metricas);
+        }
+        else if(opcion==2){
+            metricas = "MergeSort" + "," + MergeSort.tiempoTotal + "," + MergeSort.numComparaciones + "," + MergeSort.numIntercambios;
+            listaMetricas.add(metricas);
+        }
+       
+
+        m.escribirArchivoMetricas(listaMetricas);
+            
+        
     }
 
 }

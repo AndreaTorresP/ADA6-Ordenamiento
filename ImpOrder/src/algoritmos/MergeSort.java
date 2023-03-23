@@ -10,6 +10,9 @@ import mode1.spotify;
 public class MergeSort {
     private static spotify[] theArray; // ref to array theArray
     private int nElems; // number of data items
+    public static long tiempoTotal = 0;
+    public static int numComparaciones = 0;
+    public static int numIntercambios = 0;
 
     public MergeSort(int max) {
         theArray = new spotify[max]; // create array
@@ -30,9 +33,14 @@ public class MergeSort {
     }
 
     public spotify[] mergeSort(LinkedList<spotify> lista, int subOpcion, int tipoOrden) {
+        long inicio = System.currentTimeMillis(); // inicio de la ejecución del algoritmo;
 
         spotify[] workSpace = new spotify[nElems];
         recMergeSort(workSpace, 0, nElems - 1, subOpcion, tipoOrden);
+
+        long fin = System.currentTimeMillis();
+
+        tiempoTotal = fin - inicio;
         return theArray;
     }
 
@@ -62,36 +70,52 @@ public class MergeSort {
 
         if (subOpcion == 1) {
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) < 0)
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) < 0) {
                     workSpace[j++] = theArray[lowPtr++];
+                    numComparaciones++;
+                    numIntercambios++;
+                }
+
                 else
                     workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             while (lowPtr <= mid)
                 workSpace[j++] = theArray[lowPtr++];
+            numIntercambios++;
 
             while (highPtr <= upperBound)
                 workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             for (j = 0; j < n; j++)
                 theArray[lowerBound + j] = workSpace[j];
+            numIntercambios++;
 
         } else {
 
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getPopularity() < theArray[highPtr].getPopularity())
+                if (theArray[lowPtr].getPopularity() < theArray[highPtr].getPopularity()) {
                     workSpace[j++] = theArray[lowPtr++];
+                    numComparaciones++;
+                    numIntercambios++;
+                }
+
                 else
                     workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             while (lowPtr <= mid)
                 workSpace[j++] = theArray[lowPtr++];
+            numIntercambios++;
 
             while (highPtr <= upperBound)
                 workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             for (j = 0; j < n; j++)
                 theArray[lowerBound + j] = workSpace[j];
+            numIntercambios++;
         }
 
     }
@@ -105,36 +129,52 @@ public class MergeSort {
 
         if (subOpcion == 1) {
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) > 0)
+                if (theArray[lowPtr].getName().compareTo(theArray[highPtr].getName()) > 0) {
                     workSpace[j++] = theArray[lowPtr++];
+                    numComparaciones++;
+                    numIntercambios++;
+                }
+
                 else
                     workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             while (lowPtr <= mid)
                 workSpace[j++] = theArray[lowPtr++];
+            numIntercambios++;
 
             while (highPtr <= upperBound)
                 workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             for (j = 0; j < n; j++)
                 theArray[lowerBound + j] = workSpace[j];
+            numIntercambios++;
 
         } else {
 
             while (lowPtr <= mid && highPtr <= upperBound)
-                if (theArray[lowPtr].getPopularity() > theArray[highPtr].getPopularity())
+                if (theArray[lowPtr].getPopularity() > theArray[highPtr].getPopularity()) {
                     workSpace[j++] = theArray[lowPtr++];
+                    numComparaciones++;
+                    numIntercambios++;
+                }
+
                 else
                     workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             while (lowPtr <= mid)
                 workSpace[j++] = theArray[lowPtr++];
+            numIntercambios++;
 
             while (highPtr <= upperBound)
                 workSpace[j++] = theArray[highPtr++];
+            numIntercambios++;
 
             for (j = 0; j < n; j++)
                 theArray[lowerBound + j] = workSpace[j];
+            numIntercambios++;
         }
 
     }
