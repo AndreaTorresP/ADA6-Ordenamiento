@@ -1,17 +1,17 @@
 import java.util.LinkedList;
 
 public class QuickSort{
-    LinkedList<spotify> theArray;
+    LinkedList<Empleo> theArray;
     private String tipoDato;          // letras o numeros
     private String tipoOrden;         // menor o mayor
 
-    public QuickSort(String tipoDato, String tipoOrden, LinkedList<spotify> theArray)   {
+    public QuickSort(String tipoDato, String tipoOrden, LinkedList<Empleo> theArray)   {
       this.theArray = theArray;
       this.tipoDato = tipoDato;
       this.tipoOrden = tipoOrden;
     }
 
-    public void insert(spotify value){
+    public void insert(Empleo value){
       theArray.add(value);
     }
 
@@ -22,34 +22,31 @@ public class QuickSort{
     }
 
     private void swap(int i, int j){
-        spotify tempI = theArray.get(i);
-        spotify tempJ = theArray.get(j);
+        Empleo tempI = theArray.get(i);
+        Empleo tempJ = theArray.get(j);
 
-        theArray.add(i, tempJ);
-        theArray.remove(i+1);
-
-        theArray.add(j, tempI);
-        theArray.remove(j+1);
+        theArray.set(i, tempJ);
+        theArray.set(j, tempI);
     }
     
-    //Menor a mayor / Alfabeticamente
-    private int partitionMenor(int low, int high){
-        spotify pivot = theArray.get(high);
+    //Numeros
+    private int partitionNums(int low, int high){
+        Empleo pivot = theArray.get(high);
         int i = (low - 1);
     
-        if(tipoDato=="numeros"){
+        if(tipoOrden=="menor"){
             //Menor a mayor
             for(int j = low; j <= high - 1; j++){
-                if (theArray.get(j).getPopularity() < pivot.getPopularity()){
+                if (theArray.get(j).getSalary() < pivot.getSalary()){
                     i++;
                     swap(i, j);
                 }
             }
         }
         else{
-            //Alfabeticamente
+            //Mayor a menor
             for(int j = low; j <= high - 1; j++){
-                if (theArray.get(j).getName().compareTo(pivot.getName())<0){
+                if (theArray.get(j).getSalary() > pivot.getSalary()){
                     i++;
                     swap(i, j);
                 }
@@ -59,15 +56,15 @@ public class QuickSort{
         return (i + 1);
     }
 
-    //Mayor a menor / Contrario a alfabeticamente
-    private int partitionMayor(int low, int high){
-        spotify pivot = theArray.get(high);
+    //Letras
+    private int partitionChars(int low, int high){
+        String pivot = theArray.get(high).getJobTitle().toLowerCase();
         int i = (low - 1);
     
-        if(tipoDato=="numeros"){
-            //Mayor a menor
+        if(tipoOrden=="menor"){
+            //Alfabeticamente
             for(int j = low; j <= high - 1; j++){
-                if (theArray.get(j).getPopularity() > pivot.getPopularity()){
+                if (theArray.get(j).getJobTitle().toLowerCase().compareTo(pivot)<0){
                     i++;
                     swap(i, j);
                 }
@@ -76,7 +73,7 @@ public class QuickSort{
         else{
             //Contrario a alfabeticamente
             for(int j = low; j <= high - 1; j++){
-                if (theArray.get(j).getName().compareTo(pivot.getName())>0){
+                if (theArray.get(j).getJobTitle().toLowerCase().compareTo(pivot)>0){
                     i++;
                     swap(i, j);
                 }
@@ -88,9 +85,10 @@ public class QuickSort{
     
     public void recQSort(int low, int high){
         int pi;
+
         if (low < high){
-            if(tipoOrden == "menor") pi = partitionMenor(low, high);
-            else pi = partitionMayor(low, high);
+            if(tipoDato == "numeros")pi = partitionNums(low, high);
+            else pi = partitionChars(low, high);
 
             recQSort(low, pi - 1);
             recQSort(pi + 1, high);
