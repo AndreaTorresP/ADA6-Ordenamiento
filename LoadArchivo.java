@@ -1,12 +1,11 @@
 import java.io.BufferedReader;
-//import java.io.File;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
-//import java.util.Scanner;
-//import java.util.StringTokenizer;
 
 public class LoadArchivo {
     LinkedList<Empleo> listaEmpleos = new LinkedList<Empleo>();
@@ -51,34 +50,6 @@ public class LoadArchivo {
         }
 
         return listaEmpleos;
-
-        /*try (Scanner scan = new Scanner(archivo)) {
-            StringTokenizer tokenizer;
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                tokenizer = new StringTokenizer(line, ",");
-                int id = Integer.parseInt(tokenizer.nextToken());
-                String name = tokenizer.nextToken();
-                String artist = tokenizer.nextToken();
-                String genre = tokenizer.nextToken();
-                int beats = Integer.parseInt(tokenizer.nextToken());
-                int energy = Integer.parseInt(tokenizer.nextToken());
-                int danceability = Integer.parseInt(tokenizer.nextToken());
-                int loudness = Integer.parseInt(tokenizer.nextToken());
-                int liveness = Integer.parseInt(tokenizer.nextToken());
-                int valence = Integer.parseInt(tokenizer.nextToken());
-                int length = Integer.parseInt(tokenizer.nextToken());
-                int acousticness = Integer.parseInt(tokenizer.nextToken());
-                int speechiness = Integer.parseInt(tokenizer.nextToken());
-                int popularity = Integer.parseInt(tokenizer.nextToken());
-
-                spotify sp = new spotify(id, name, artist, genre, beats, energy, danceability, loudness, liveness,
-                valence, length, acousticness, speechiness, popularity);
-                topSpotify.add(sp);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void writeCSV(LinkedList<Empleo> listaOrdenada, String filenameSalida){
@@ -103,6 +74,33 @@ public class LoadArchivo {
             }
 
             fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void metricasCSV(ArrayList<Metrica> listaMetricas, String direccion){
+        File archivo;
+        String path = direccion + "Metricas.csv";
+        String delimitador = ",";
+        String nextLine = "\n";
+        
+        archivo = new File(path);
+        
+        try{
+            FileWriter fw = new FileWriter(archivo);
+
+            fw.append("Algoritmo").append(delimitador).append("Tiempo de ejecucion (ms)").append(delimitador)
+            .append("Comparaciones").append(delimitador).append("Intercambios").append(nextLine);
+            
+            for(int i = 0; i < listaMetricas.size(); i++ ) {
+                fw.append(listaMetricas.get(i).getAlgoritmo()).append(delimitador)
+                .append(listaMetricas.get(i).getTiempoEjecucion() + "").append(delimitador)
+                .append(listaMetricas.get(i).getComparaciones() + "").append(delimitador)
+                .append(listaMetricas.get(i).getIntercambios() + "").append(nextLine);
+            }
+
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -4,11 +4,14 @@ public class MergeSort{
    LinkedList<Empleo> theArray = new LinkedList<>();
    private String tipoDato;
    private String tipoOrden;
+   int[] metricas = new int[2]; // [0] = comparaciones, [1] = intercambios
 
    public MergeSort(LinkedList<Empleo> theArray, String tipoDato, String tipoOrden)   {
       this.theArray = theArray;
       this.tipoDato = tipoDato;
       this.tipoOrden = tipoOrden;
+      metricas[0] = 0;
+      metricas[1] = 0;
    }
 
    public void insert(Empleo value){
@@ -21,11 +24,13 @@ public class MergeSort{
       System.out.println("");
    }
 
-   public void mergeSort() {
+   public int[] mergeSort() {
       LinkedList<Empleo> workSpace = new LinkedList<>();
       for(int i=0; i<theArray.size(); i++) workSpace.add(null);
 
       recMergeSort(workSpace, 0, theArray.size()-1);
+
+      return metricas;
    }
 
    private void recMergeSort(LinkedList<Empleo> workSpace, int lowerBound, int upperBound){
@@ -47,44 +52,62 @@ public class MergeSort{
 
       if(tipoDato=="numeros"){
          if(tipoOrden == "menor"){
-            while(lowPtr <= mid && highPtr <= upperBound)
+            while(lowPtr <= mid && highPtr <= upperBound){
+               metricas[0]++;
+               metricas[1]++;
                if( theArray.get(lowPtr).getSalary() < theArray.get(highPtr).getSalary())
                   workSpace.set(j++, theArray.get(lowPtr++));
                else
                   workSpace.set(j++, theArray.get(highPtr++));
+            }
          }
          else{
-            while(lowPtr <= mid && highPtr <= upperBound)
+            while(lowPtr <= mid && highPtr <= upperBound){
+               metricas[0]++;
+               metricas[1]++;
                if( theArray.get(lowPtr).getSalary() > theArray.get(highPtr).getSalary())
                   workSpace.set(j++, theArray.get(lowPtr++));
                else
                   workSpace.set(j++, theArray.get(highPtr++));
+            }
          }
       }
       else{
          if(tipoOrden == "menor"){
-            while(lowPtr <= mid && highPtr <= upperBound)
+            while(lowPtr <= mid && highPtr <= upperBound){
+               metricas[0]++;
+               metricas[1]++;
                if(theArray.get(lowPtr).getJobTitle().toLowerCase().compareTo(theArray.get(highPtr).getJobTitle().toLowerCase()) < 0)
                   workSpace.set(j++, theArray.get(lowPtr++));
                else
                   workSpace.set(j++, theArray.get(highPtr++));
+            }
          }
          else{
-            while(lowPtr <= mid && highPtr <= upperBound)
+            while(lowPtr <= mid && highPtr <= upperBound){
+               metricas[0]++;
+               metricas[1]++;
                if(theArray.get(lowPtr).getJobTitle().toLowerCase().compareTo(theArray.get(highPtr).getJobTitle().toLowerCase()) > 0)
                   workSpace.set(j++, theArray.get(lowPtr++));
                else
                   workSpace.set(j++, theArray.get(highPtr++));
+            }
          }
       }
 
-      while(lowPtr <= mid)
+      while(lowPtr <= mid){
+         metricas[1]++;
          workSpace.set(j++, theArray.get(lowPtr++));
+      }
 
-      while(highPtr <= upperBound)
+      while(highPtr <= upperBound){
+         metricas[1]++;
          workSpace.set(j++, theArray.get(highPtr++));
+      }
 
-      for(j=0; j<n; j++)
+      for(j=0; j<n; j++){
+         metricas[1]++;
          theArray.set(lowerBound+j, workSpace.get(j));
+      }
    }
 }

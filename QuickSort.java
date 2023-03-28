@@ -2,13 +2,16 @@ import java.util.LinkedList;
 
 public class QuickSort{
     LinkedList<Empleo> theArray;
-    private String tipoDato;          // letras o numeros
-    private String tipoOrden;         // menor o mayor
+    private String tipoDato;         // letras o numeros
+    private String tipoOrden;        // menor o mayor
+    int[] metricas = new int[2];     // [0] = comparaciones, [1] = intercambios
 
-    public QuickSort(String tipoDato, String tipoOrden, LinkedList<Empleo> theArray)   {
-      this.theArray = theArray;
-      this.tipoDato = tipoDato;
-      this.tipoOrden = tipoOrden;
+    public QuickSort(String tipoDato, String tipoOrden, LinkedList<Empleo> theArray){
+        this.theArray = theArray;
+        this.tipoDato = tipoDato;
+        this.tipoOrden = tipoOrden;
+        metricas[0] = 0;
+        metricas[1] = 0;
     }
 
     public void insert(Empleo value){
@@ -27,8 +30,10 @@ public class QuickSort{
 
         theArray.set(i, tempJ);
         theArray.set(j, tempI);
+
+        metricas[1]++;
     }
-    
+
     //Numeros
     private int partitionNums(int low, int high){
         Empleo pivot = theArray.get(high);
@@ -37,6 +42,7 @@ public class QuickSort{
         if(tipoOrden=="menor"){
             //Menor a mayor
             for(int j = low; j <= high - 1; j++){
+                metricas[0]++;
                 if (theArray.get(j).getSalary() < pivot.getSalary()){
                     i++;
                     swap(i, j);
@@ -46,13 +52,16 @@ public class QuickSort{
         else{
             //Mayor a menor
             for(int j = low; j <= high - 1; j++){
+                metricas[0]++;
                 if (theArray.get(j).getSalary() > pivot.getSalary()){
                     i++;
                     swap(i, j);
                 }
             }
         }
+
         swap(i + 1, high);
+
         return (i + 1);
     }
 
@@ -64,6 +73,7 @@ public class QuickSort{
         if(tipoOrden=="menor"){
             //Alfabeticamente
             for(int j = low; j <= high - 1; j++){
+                metricas[0]++;
                 if (theArray.get(j).getJobTitle().toLowerCase().compareTo(pivot)<0){
                     i++;
                     swap(i, j);
@@ -73,17 +83,20 @@ public class QuickSort{
         else{
             //Contrario a alfabeticamente
             for(int j = low; j <= high - 1; j++){
+                metricas[0]++;
                 if (theArray.get(j).getJobTitle().toLowerCase().compareTo(pivot)>0){
                     i++;
                     swap(i, j);
                 }
             }
         }
+
         swap(i + 1, high);
+
         return (i + 1);
     }
     
-    public void recQSort(int low, int high){
+    public int[] recQSort(int low, int high){
         int pi;
 
         if (low < high){
@@ -93,5 +106,7 @@ public class QuickSort{
             recQSort(low, pi - 1);
             recQSort(pi + 1, high);
         }
+
+        return metricas;
     }
 }
