@@ -14,6 +14,10 @@ public class QuickSort{
         metricas[1] = 0;
     }
 
+    
+    /** 
+     * @param value
+     */
     public void insert(Empleo value){
       theArray.add(value);
     }
@@ -24,6 +28,11 @@ public class QuickSort{
       System.out.println("");
     }
 
+    
+    /** 
+     * @param i
+     * @param j
+     */
     private void swap(int i, int j){
         Empleo tempI = theArray.get(i);
         Empleo tempJ = theArray.get(j);
@@ -34,6 +43,12 @@ public class QuickSort{
         metricas[1]++;
     }
 
+    
+    /** 
+     * @param low
+     * @param high
+     * @return int
+     */
     //Numeros
     private int partitionNums(int low, int high){
         Empleo pivot = theArray.get(high);
@@ -65,6 +80,12 @@ public class QuickSort{
         return (i + 1);
     }
 
+    
+    /** 
+     * @param low
+     * @param high
+     * @return int
+     */
     //Letras
     private int partitionChars(int low, int high){
         String pivot = theArray.get(high).getJobTitle().toLowerCase();
@@ -96,6 +117,12 @@ public class QuickSort{
         return (i + 1);
     }
     
+    
+    /** 
+     * @param low
+     * @param high
+     * @return int[]
+     */
     public int[] recQSort(int low, int high){
         int pi;
 

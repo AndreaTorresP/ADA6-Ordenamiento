@@ -14,6 +14,10 @@ public class MergeSort{
       metricas[1] = 0;
    }
 
+   
+   /** 
+    * @param value
+    */
    public void insert(Empleo value){
       theArray.add(value);
    }
@@ -24,6 +28,10 @@ public class MergeSort{
       System.out.println("");
    }
 
+   
+   /** 
+    * @return int[]
+    */
    public int[] mergeSort() {
       LinkedList<Empleo> workSpace = new LinkedList<>();
       for(int i=0; i<theArray.size(); i++) workSpace.add(null);
@@ -33,6 +41,12 @@ public class MergeSort{
       return metricas;
    }
 
+   
+   /** 
+    * @param workSpace
+    * @param lowerBound
+    * @param upperBound
+    */
    private void recMergeSort(LinkedList<Empleo> workSpace, int lowerBound, int upperBound){
       if(lowerBound == upperBound)            // if range is 1,
          return;                              // no use sorting
@@ -44,6 +58,13 @@ public class MergeSort{
       }
    }
 
+   
+   /** 
+    * @param workSpace
+    * @param lowPtr
+    * @param highPtr
+    * @param upperBound
+    */
    private void merge(LinkedList<Empleo> workSpace, int lowPtr, int highPtr, int upperBound) {
       int j = 0;                             // workspace index
       int lowerBound = lowPtr;

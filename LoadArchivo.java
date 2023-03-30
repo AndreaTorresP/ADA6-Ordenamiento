@@ -15,6 +15,11 @@ public class LoadArchivo {
         this.firstLine = "";
     }
 
+    
+    /** 
+     * @param filenameEntrada
+     * @return LinkedList<Empleo>
+     */
     public LinkedList<Empleo> readSCV(String filenameEntrada) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filenameEntrada));
@@ -52,6 +57,11 @@ public class LoadArchivo {
         return listaEmpleos;
     }
 
+    
+    /** 
+     * @param listaOrdenada
+     * @param filenameSalida
+     */
     public void writeCSV(LinkedList<Empleo> listaOrdenada, String filenameSalida){
         String delimitador = ",";
         String nextLine = "\n";
@@ -80,6 +90,11 @@ public class LoadArchivo {
         }
     }
 
+    
+    /** 
+     * @param listaMetricas
+     * @param direccion
+     */
     public void metricasCSV(ArrayList<Metrica> listaMetricas, String direccion){
         File archivo;
         String path = direccion + "Metricas.csv";
