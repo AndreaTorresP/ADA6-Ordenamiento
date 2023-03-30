@@ -12,7 +12,6 @@ public class RadixSort {
       	metricas[1] = 0;
     }
 
-    
 	/** 
 	 * @param value
 	 */
@@ -25,7 +24,6 @@ public class RadixSort {
             System.out.print(theArray.get(j).display());
         System.out.println();
     }
-
 	
 	/** 
 	 * @param array
@@ -44,7 +42,6 @@ public class RadixSort {
 		return mx.getSalary();
 	}
 
-	
 	/** 
 	 * @param exp
 	 */
@@ -76,7 +73,6 @@ public class RadixSort {
 		}
 	}
 
-	
 	/** 
 	 * @param exp
 	 */
@@ -108,7 +104,6 @@ public class RadixSort {
 		}
 	}
 
-	
 	/** 
 	 * @return int[]
 	 */
