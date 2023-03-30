@@ -12,7 +12,10 @@ public class RadixSort {
       	metricas[1] = 0;
     }
 
-    public void insert(Empleo value){
+	/** 
+	 * @param value
+	 */
+	public void insert(Empleo value){
         theArray.add(value);
     }
 
@@ -21,7 +24,11 @@ public class RadixSort {
             System.out.print(theArray.get(j).display());
         System.out.println();
     }
-
+	
+	/** 
+	 * @param array
+	 * @return long
+	 */
 	// A utility function to get maximum value in arr[]
 	private long getMax(LinkedList<Empleo> array){
 		Empleo mx = array.getFirst();
@@ -35,6 +42,9 @@ public class RadixSort {
 		return mx.getSalary();
 	}
 
+	/** 
+	 * @param exp
+	 */
 	// A function to do counting sort of arr[] according to
 	// the digit represented by exp.
 	//Menor a mayor
@@ -63,6 +73,9 @@ public class RadixSort {
 		}
 	}
 
+	/** 
+	 * @param exp
+	 */
 	// A function to do counting sort of arr[] according to
 	// the digit represented by exp.
 	//Mayor a menor
@@ -91,6 +104,9 @@ public class RadixSort {
 		}
 	}
 
+	/** 
+	 * @return int[]
+	 */
 	// The main function to that sorts arr[] of size n using
 	// Radix Sort
 	public int[] sort(){
