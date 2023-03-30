@@ -15,6 +15,11 @@ public class LoadArchivo {
         this.firstLine = "";
     }
 
+    
+    /** 
+     * @param filenameEntrada
+     * @return LinkedList<Empleo>
+     */
     public LinkedList<Empleo> readSCV(String filenameEntrada) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filenameEntrada));

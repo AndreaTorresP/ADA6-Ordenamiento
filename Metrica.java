@@ -11,6 +11,10 @@ public class Metrica {
         this.tiempoEjecucion = tiempoEjecucion;
     }
 
+    
+    /** 
+     * @param algoritmo
+     */
     public void setAlgoritmo(String algoritmo) {
         this.algoritmo = algoritmo;
     }

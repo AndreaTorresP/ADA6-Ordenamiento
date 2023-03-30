@@ -3,6 +3,10 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         String direccion = "CSV/";
         String archiboEntrada = direccion + "Salary-Data.csv";

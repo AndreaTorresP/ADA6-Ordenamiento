@@ -10,6 +10,14 @@ public class BinaryInsertionSort {
         metricas[1] = 0;
     }
 
+    
+    /** 
+     * @param item
+     * @param low
+     * @param high
+     * @param subOpcion
+     * @return int
+     */
     private int binarySearchAscendente(Empleo item, int low, int high, int subOpcion) {
         if (subOpcion == 1) {
             while (low <= high) {

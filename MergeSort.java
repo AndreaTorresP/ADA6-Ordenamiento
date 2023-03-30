@@ -14,6 +14,10 @@ public class MergeSort{
       metricas[1] = 0;
    }
 
+   
+   /** 
+    * @param value
+    */
    public void insert(Empleo value){
       theArray.add(value);
    }

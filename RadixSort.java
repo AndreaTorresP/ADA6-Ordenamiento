@@ -12,7 +12,11 @@ public class RadixSort {
       	metricas[1] = 0;
     }
 
-    public void insert(Empleo value){
+    
+	/** 
+	 * @param value
+	 */
+	public void insert(Empleo value){
         theArray.add(value);
     }
 

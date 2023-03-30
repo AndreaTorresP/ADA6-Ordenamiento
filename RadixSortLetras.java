@@ -11,7 +11,11 @@ public class RadixSortLetras {
 		for(int i=0; i<theArray.size(); i++) insert(theArray.get(i));
     }
     
-    //-----------------------------------------------------------
+    
+	/** 
+	 * @param value
+	 */
+	//-----------------------------------------------------------
     public void insert(Empleo value){
         theArray[nElems] = value;      // insert it
         nElems++;                      // increment size

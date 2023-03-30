@@ -15,6 +15,10 @@ public class Empleo {
         this.salary = salary;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getAge() {
         return age;
     }
