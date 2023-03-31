@@ -3,6 +3,10 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         String direccion = "CSV/";
         String archiboEntrada = direccion + "Salary-Data.csv";
@@ -107,6 +111,11 @@ public class Main {
         entrada.close();
     }
 
+    
+    /** 
+     * @param listaOriginal
+     * @param listaCopia
+     */
     public static void copiarLista(LinkedList<Empleo> listaOriginal, LinkedList<Empleo> listaCopia){
         listaCopia.clear();
         for(int i=0; i<listaOriginal.size(); i++) listaCopia.add(listaOriginal.get(i));
