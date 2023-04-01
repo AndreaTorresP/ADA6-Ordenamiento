@@ -6,21 +6,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+/**
+ * La clase LoadArchivo contiene metodos para manipular un archivo CSV.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/JonathanQu3v3do/Ada4List.git>
+ */
 public class LoadArchivo {
     LinkedList<Empleo> listaEmpleos = new LinkedList<Empleo>();
     String firstLine;
 
+    /**
+     * Constructor para LoadArchivo.
+     */
     public LoadArchivo() {
         this.firstLine = "";
     }
 
-    
     /** 
+     * Lee un archivo CSV y lo guarda en una lista ligada.
      * @param filenameEntrada
      * @return LinkedList<Empleo>
      */
-    public LinkedList<Empleo> readSCV(String filenameEntrada) {
+    public LinkedList<Empleo> readCSV(String filenameEntrada) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filenameEntrada));
             String line = null;
@@ -57,8 +64,8 @@ public class LoadArchivo {
         return listaEmpleos;
     }
 
-    
     /** 
+     * Escribe un archivo CSV con una lista ligada.
      * @param listaOrdenada
      * @param filenameSalida
      */
@@ -90,8 +97,8 @@ public class LoadArchivo {
         }
     }
 
-    
     /** 
+     * Escribe un archivo CSV para las metricas de los algoritmos de ordenamiento.
      * @param listaMetricas
      * @param direccion
      */

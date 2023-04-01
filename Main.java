@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-
+/**
+ * La clase Main del programa ejecuta los algoritmos de ordenamiento.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/JonathanQu3v3do/Ada4List.git>
+ */
 public class Main {
-    
     /** 
      * @param args
      */
@@ -25,7 +28,7 @@ public class Main {
         long tiempoTotal;
 
         LoadArchivo ls= new LoadArchivo();
-        listaDatos = ls.readSCV(archiboEntrada);
+        listaDatos = ls.readCSV(archiboEntrada);
         copiarLista(listaDatos, listaCopia);
 
         //Menu
@@ -111,8 +114,8 @@ public class Main {
         entrada.close();
     }
 
-    
     /** 
+     * Copia una lista ligada en otra.
      * @param listaOriginal
      * @param listaCopia
      */

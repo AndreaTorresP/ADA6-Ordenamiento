@@ -1,11 +1,21 @@
 import java.util.LinkedList;
-
+/**
+ * La clase QuickSort representa el algoritmo de ordenamiento QuickSort.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/AndreaTorresP/ADA6-Ordenamiento.git>
+ */
 public class QuickSort{
     LinkedList<Empleo> theArray;
     private String tipoDato;         // letras o numeros
     private String tipoOrden;        // menor o mayor
     int[] metricas = new int[2];     // [0] = comparaciones, [1] = intercambios
 
+    /** 
+    * Constructor de QuickSort.
+    * @param tipoDato
+    * @param tipoOrden
+    * @param theArray
+    */
     public QuickSort(String tipoDato, String tipoOrden, LinkedList<Empleo> theArray){
         this.theArray = theArray;
         this.tipoDato = tipoDato;
@@ -14,22 +24,17 @@ public class QuickSort{
         metricas[1] = 0;
     }
 
-    
     /** 
-     * @param value
+     * Imprime el contenido de la lista.
      */
-    public void insert(Empleo value){
-      theArray.add(value);
-    }
-
     public void display() {
       for(int j=0; j<theArray.size(); j++)
         System.out.println(theArray.get(j).display());
       System.out.println("");
     }
 
-    
     /** 
+     * Intercambia el dato i de la lista con el dato j.
      * @param i
      * @param j
      */
@@ -43,13 +48,14 @@ public class QuickSort{
         metricas[1]++;
     }
 
-    
     /** 
+     * Coloca el ultimo elemento como pivote y lo coloca en su posicion correcta ordenado por el salario del
+     * trabajo; dependiendo de la opcion, coloca los valores menores a su izquierda y los mayores a su derecha o
+     * viceversa.
      * @param low
      * @param high
      * @return int
      */
-    //Numeros
     private int partitionNums(int low, int high){
         Empleo pivot = theArray.get(high);
         int i = (low - 1);
@@ -80,13 +86,13 @@ public class QuickSort{
         return (i + 1);
     }
 
-    
     /** 
+     * Coloca el ultimo elemento como pivote y lo coloca en su posicion correcta ordenado por el nombre del trabajo;
+     * dependiendo de la opcion, coloca los valores menores a su izquierda y los mayores a su derecha o viceversa.
      * @param low
      * @param high
      * @return int
      */
-    //Letras
     private int partitionChars(int low, int high){
         String pivot = theArray.get(high).getJobTitle().toLowerCase();
         int i = (low - 1);
@@ -117,8 +123,8 @@ public class QuickSort{
         return (i + 1);
     }
     
-    
     /** 
+     * Metodo principal del algoritmo de ordenamiento, implementa el QuickSort.
      * @param low
      * @param high
      * @return int[]

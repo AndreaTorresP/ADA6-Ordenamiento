@@ -1,10 +1,19 @@
 import java.util.*;
-
+/**
+ * La clase RadixSort representa el algoritmo de ordenamiento RadixSort.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/AndreaTorresP/ADA6-Ordenamiento.git>
+ */
 public class RadixSort {
 	LinkedList<Empleo> theArray;
     private String tipoOrden;     // menor o mayor
 	int[] metricas = new int[2];  // [0] = comparaciones, [1] = intercambios
 
+	/** 
+    * Constructor de RadixSort.
+    * @param tipoOrden
+    * @param theArray
+    */
 	public RadixSort(String tipoOrden, LinkedList<Empleo> theArray) {
         this.theArray = theArray;
 		this.tipoOrden = tipoOrden;
@@ -13,23 +22,19 @@ public class RadixSort {
     }
 
 	/** 
-	 * @param value
-	 */
-	public void insert(Empleo value){
-        theArray.add(value);
-    }
-
+     * Imprime el contenido de la lista.
+     */
     public void display() {
         for(int j=0; j<theArray.size(); j++)
             System.out.print(theArray.get(j).display());
         System.out.println();
     }
-	
+
 	/** 
+	 * Encuentra el valor maximo de la lista.
 	 * @param array
 	 * @return long
 	 */
-	// A utility function to get maximum value in arr[]
 	private long getMax(LinkedList<Empleo> array){
 		Empleo mx = array.getFirst();
 
@@ -43,11 +48,9 @@ public class RadixSort {
 	}
 
 	/** 
+	 * Hace un CountingSort ascendente del array de acuerdo al digito representado por exp.
 	 * @param exp
 	 */
-	// A function to do counting sort of arr[] according to
-	// the digit represented by exp.
-	//Menor a mayor
 	private void countSortMenor(int exp){
 		Empleo[] output = new Empleo[theArray.size()];
 		int i;
@@ -74,11 +77,9 @@ public class RadixSort {
 	}
 
 	/** 
+	 * Hace un CountingSort descendente del array de acuerdo al digito representado por exp.
 	 * @param exp
 	 */
-	// A function to do counting sort of arr[] according to
-	// the digit represented by exp.
-	//Mayor a menor
 	private void countSortMayor(int exp){
 		Empleo[] output = new Empleo[theArray.size()];
 		int i;
@@ -105,10 +106,9 @@ public class RadixSort {
 	}
 
 	/** 
+	 * Metodo principal del algoritmo de ordenamiento, implementa el RadixSort.
 	 * @return int[]
 	 */
-	// The main function to that sorts arr[] of size n using
-	// Radix Sort
 	public int[] sort(){
 		long m = getMax(theArray);
 

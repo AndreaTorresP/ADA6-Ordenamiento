@@ -1,11 +1,21 @@
 import java.util.LinkedList;
-
+/**
+ * La clase MergeSort representa el algoritmo de ordenamiento MergeSort.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/AndreaTorresP/ADA6-Ordenamiento.git>
+ */
 public class MergeSort{
    LinkedList<Empleo> theArray = new LinkedList<>();
    private String tipoDato;
    private String tipoOrden;
    int[] metricas = new int[2]; // [0] = comparaciones, [1] = intercambios
 
+   /** 
+    * Constructor de MergeSort.
+    * @param theArray
+    * @param tipoDato
+    * @param tipoOrden
+    */
    public MergeSort(LinkedList<Empleo> theArray, String tipoDato, String tipoOrden)   {
       this.theArray = theArray;
       this.tipoDato = tipoDato;
@@ -14,22 +24,17 @@ public class MergeSort{
       metricas[1] = 0;
    }
 
-   
    /** 
-    * @param value
-    */
-   public void insert(Empleo value){
-      theArray.add(value);
-   }
-
+     * Imprime el contenido de la lista.
+     */
    public void display() {
       for(int j=0; j<theArray.size(); j++)
          System.out.print(theArray.get(j) + " ");
       System.out.println("");
    }
 
-   
    /** 
+    * Metodo principal del algoritmo de ordenamiento.
     * @return int[]
     */
    public int[] mergeSort() {
@@ -41,8 +46,8 @@ public class MergeSort{
       return metricas;
    }
 
-   
    /** 
+    * Llama a los metodos para ordenar los datos de la lista, implementa el MergeSort.
     * @param workSpace
     * @param lowerBound
     * @param upperBound
@@ -58,8 +63,8 @@ public class MergeSort{
       }
    }
 
-   
    /** 
+    * Mueve los datos de la lista para ordenarlos.
     * @param workSpace
     * @param lowPtr
     * @param highPtr

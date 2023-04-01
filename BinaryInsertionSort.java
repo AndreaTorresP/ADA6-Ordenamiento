@@ -1,17 +1,25 @@
 import java.util.LinkedList;
-
+/**
+ * La clase BinaryInsertionSort representa el algoritmo de ordenamiento BinaryInsertion.
+ * @author: Andrea Torres y Jonathan Quevedo
+ * @see <https://github.com/AndreaTorresP/ADA6-Ordenamiento.git>
+ */
 public class BinaryInsertionSort {
     LinkedList<Empleo> lista = new LinkedList<>();
     int[] metricas = new int[2]; // [0] = comparaciones, [1] = intercambios
 
+    /** 
+     * Constructor de BinaryInsertionSort.
+     * @param lista
+     */
     public BinaryInsertionSort(LinkedList<Empleo> lista) {
         this.lista = lista;
         metricas[0] = 0;
         metricas[1] = 0;
     }
 
-    
     /** 
+     * Encuentra la posicion donde debe ser insertado el elemento en forma ascendente.
      * @param item
      * @param low
      * @param high
@@ -58,8 +66,8 @@ public class BinaryInsertionSort {
         return low;
     }
 
-    
     /** 
+     * Encuentra la posicion donde debe ser insertado el elemento en forma descendente.
      * @param item
      * @param low
      * @param high
@@ -106,8 +114,8 @@ public class BinaryInsertionSort {
 
     }
 
-    
     /** 
+     * Metodo principal del algoritmo de ordenamiento, ordena los datos de la lista con BinaryInsertionSort.
      * @param n
      * @param subOpcion
      * @param tipoOrden
@@ -121,7 +129,6 @@ public class BinaryInsertionSort {
             j = i - 1;
             selected = lista.get(i);
 
-            // encuentra la posicion donde debe ser insertado el elemento
             if (tipoOrden == 1) {
                 loc = binarySearchAscendente(selected, 0, j, subOpcion);
             } else
